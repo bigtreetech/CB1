@@ -1,3 +1,8 @@
+
+# OS image
+The latest system image is [here](https://github.com/bigtreetech/CB1/releases)
+
+
 # Note
 ## Here’s BIGTREETECH! For Makers, by makers!
 * We appreciate all of your support to BIGTREETECH! To offer an excellent experience of creation to every makers,We’re devoted to design and produce high-quality and durable accessories!
