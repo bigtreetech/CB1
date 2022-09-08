@@ -1,6 +1,7 @@
 
 # OS image
-The latest system image is [here](https://github.com/bigtreetech/CB1/releases)
+* The latest system image is [here](https://github.com/bigtreetech/CB1/releases)
+* The source code is [here](https://github.com/bigtreetech/CB1-Kernel)
 
 
 # Note
