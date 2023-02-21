@@ -47,11 +47,19 @@ __NOTE: The CB1 eMMC version can also use the SD card as the OS image source, an
     * Enable `Options->List All Devices` <br/><img src=Images/zadig_list.png width="500"/><br/>
     * Select the USB device to install the driver, (The device USB ID must be "1F3A:EFE8"). Click `Replace Driver` after confirming that the information is correct <br/><img src=Images/zadig_driver.png width="500"/><br/>
 4. Open the `Powershell`(windows) or `console terminal`(linux) in the [sunxi-fel](https://github.com/bigtreetech/sunxi-tools) tools path downloaded in step 1.
-5. Run `.\sunxi-fel.exe -v ver` (windows) or `sudo ./sunxi-fel  -v ver`(linux) to check whether the USB of CB1 is connected normally.<br>
+5. Run<br/>
+    `.\sunxi-fel.exe -v ver` (windows)<br/>
+    `sudo ./sunxi-fel-armhf -v ver` (linux-armhf)<br/>
+    `sudo ./sunxi-fel-aarch64 -v ver` (linux-aarch64)<br/>
+    to check whether the USB of CB1 is connected normally.<br>
     If you get `ERROR: Allwinner USB FEL device not found!` means that the USB is not recognized. Please recheck whether the driver is installed successfully.<br>
     If you get `AWUSBFEX soc=00001823(H616)` means that CB1 eMMC is ready.
      <br/><img src=Images/fel_ver.png width="1000"/><br/>
-6. Run `.\sunxi-fel.exe uboot .\u-boot-sunxi-cb1-emmc.bin`(windows) or `sudo ./sunxi-fel.exe uboot ./u-boot-sunxi-cb1-emmc.bin`(linux) to write u-boot to CB1
+6. Run<br/>
+    `.\sunxi-fel.exe uboot .\u-boot-sunxi-cb1-emmc.bin` (windows)<br/>
+    `sudo ./sunxi-fel-armhf uboot ./u-boot-sunxi-cb1-emmc.bin` (linux-armhf)<br/>
+    `sudo ./sunxi-fel-aarch64 uboot ./u-boot-sunxi-cb1-emmc.bin` (linux-aarch64)<br/>
+    to write u-boot to CB1
 7. When the uboot is written, the computer will recognize a USB flash disk, and then you can use `balenaEtcher` or `Raspberry Pi Imager` to write the OS image to eMMC. The steps are the same as the SD card version.
 8. Refor to [Overlays Settings](https://github.com/bigtreetech/CB1#overlays-settings) to set `fdtfile` to `sun50i-h616-biqu-emmc`
 
