@@ -45,7 +45,7 @@ __NOTE: The CB1 eMMC version can also use the SD card as the OS image source, an
 3. USB driver for windows (Linux skip this step): refer to the official website of [AllWinner](https://linux-sunxi.org/FEL/USBBoot#Using_sunxi-fel_on_Windows)
     * Download [Zadig](https://zadig.akeo.ie/) to the rescue
     * Enable `Options->List All Devices` <br/><img src=Images/zadig_list.png width="500"/><br/>
-    * Select the USB device to install the driver, (The device USB ID must be "1F3A:EFE8"). Click `Replace Driver` after confirming that the information is correct <br/><img src=Images/zadig_driver.png width="500"/><br/>
+    * Select the USB device to install the driver(most likely will be "unknown"). Make sure the device USB ID is "1F3A:EFE8"). Click `Install Driver` after confirming that the information is correct <br/><img src=Images/zadig_driver.png width="500"/><br/>
 4. Open the `Powershell`(windows) or `console terminal`(linux) in the [sunxi-fel](https://github.com/bigtreetech/sunxi-tools) tools path downloaded in step 1.
 5. Run<br/>
     `.\sunxi-fel.exe -v ver` (windows)<br/>
@@ -54,6 +54,9 @@ __NOTE: The CB1 eMMC version can also use the SD card as the OS image source, an
     to check whether the USB of CB1 is connected normally.<br>
     If you get `ERROR: Allwinner USB FEL device not found!` means that the USB is not recognized. Please recheck whether the driver is installed successfully.<br>
     If you get `AWUSBFEX soc=00001823(H616)` means that CB1 eMMC is ready.
+    
+    Here on the first line is an example of error you will see if the driver did not install correctly.
+    On the second line is an example of what it will look like after zadig has installed the driver correctly.
      <br/><img src=Images/fel_ver.png width="1000"/><br/>
 6. Run<br/>
     `.\sunxi-fel.exe uboot .\u-boot-sunxi-cb1-emmc.bin` (windows)<br/>
