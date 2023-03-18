@@ -37,7 +37,10 @@ For example: `WIFI_SSID="CB1 Tester"`
 
 # CB1 eMMC Version
 __NOTE: The CB1 eMMC version can also use the SD card as the OS image source, and the priority of the SD card is higher than on-board eMMC, so when using the eMMC, remember not to insert the OS SD card__
-1. Download [sunxi-fel](https://github.com/bigtreetech/sunxi-tools)(write u-boot to CB1 via USB-OTG tools) to your computer (Only support windows or linux computer, Mac OS is not supported)
+1. Download the utility [sunxi-fel](https://github.com/bigtreetech/sunxi-tools) to your computer (Mac OS is not supported) and download the CB1 [driver](https://github.com/bigtreetech/sunxi-tools/raw/master/u-boot-sunxi-cb1-emmc.bin)
+   For windows download [sunxi-fel.exe](https://github.com/bigtreetech/sunxi-tools/raw/master/sunxi-fel.exe)
+   For linux download [sunxi-fel-aarch64](https://github.com/bigtreetech/sunxi-tools/raw/master/sunxi-fel-aarch64)
+   For arm download [sunxi-fel-armhf](https://github.com/bigtreetech/sunxi-tools/raw/master/sunxi-fel-armhf)
 2. Push the DIP switch (USB OTG) and (RPI BOOT) to ON to enter BOOT mode.<br/>
     As shown in the following figure is for PI4B_Adapter.<br/>
     For other motherboards, refer to the CM4 eMMC part of the motherboard manual to set the switch.<br/>
@@ -46,7 +49,7 @@ __NOTE: The CB1 eMMC version can also use the SD card as the OS image source, an
     * Download [Zadig](https://zadig.akeo.ie/) to the rescue
     * Enable `Options->List All Devices` <br/><img src=Images/zadig_list.png width="500"/><br/>
     * Select the USB device to install the driver(most likely will be "unknown"). Make sure the device USB ID is "1F3A:EFE8"). Click `Install Driver` after confirming that the information is correct <br/><img src=Images/zadig_driver.png width="500"/><br/>
-4. Open the `Powershell`(windows) or `console terminal`(linux) in the [sunxi-fel](https://github.com/bigtreetech/sunxi-tools) tools path downloaded in step 1.
+4. Open the `Powershell`(windows) or `console terminal`(linux) where you downloaded the sunxi-fel tools and CB1 driver in step 1.
 5. Run<br/>
     `.\sunxi-fel.exe -v ver` (windows)<br/>
     `sudo ./sunxi-fel-armhf -v ver` (linux-armhf)<br/>
