@@ -72,6 +72,1042 @@ __NOTE: The CB1 eMMC version can also use the SD card as the OS image source, an
 7. When the uboot is written, the computer will recognize a USB flash disk, and then you can use `balenaEtcher` or `Raspberry Pi Imager` to write the OS image to eMMC. The steps are the same as the SD card version.
 8. Refor to [Overlays Settings](https://github.com/bigtreetech/CB1#overlays-settings) to set `fdtfile` to `sun50i-h616-biqu-emmc`
 
+# 40 Pin GPIO
+<table style="color:black">
+<tr>
+    <td rowspan=2 align=center bgcolor=gray>
+        Pin
+    </td>
+    <td colspan=2 align=center bgcolor=#B7DEE8>
+        BTT Pi
+    </td>
+    <td colspan=2 align=center bgcolor=#E6B8B7>
+        CB1 eMMC
+    </td>
+    <td colspan=2 align=center bgcolor=#CCC0DA>
+        CB1
+    </td>
+    <td colspan=2 align=center bgcolor=#D8E4BC>
+        CM4
+    </td>
+    <td colspan=2 align=center bgcolor=#D8E4BC>
+        CM4
+    </td>
+    <td colspan=2 align=center bgcolor=#CCC0DA>
+        CB1
+    </td>
+    <td colspan=2 align=center bgcolor=#E6B8B7>
+        CB1 eMMC
+    </td>
+    <td colspan=2 align=center bgcolor=#B7DEE8>
+        BTT Pi
+    </td>
+    <td rowspan=2 align=center bgcolor=gray>
+        Pin
+    </td>
+</tr>
+
+<tr>
+    <td bgcolor=#B7DEE8>
+        Signal
+    </td>
+    <td align=center bgcolor=#B7DEE8>
+        Description
+    </td>
+    <td align=center bgcolor=#E6B8B7>
+        Signal
+    </td>
+    <td align=center bgcolor=#E6B8B7>
+        Description
+    </td>
+    <td align=center bgcolor=#CCC0DA>
+        Signal
+    </td>
+    <td align=center bgcolor=#CCC0DA>
+        Description
+    </td>
+    <td align=center bgcolor=#D8E4BC>
+        Signal
+    </td>
+    <td align=center bgcolor=#D8E4BC>
+        Description
+    </td>
+    <td align=center bgcolor=#D8E4BC>
+        Signal
+    </td>
+    <td align=center bgcolor=#D8E4BC>
+        Description
+    </td>
+    <td align=center bgcolor=#CCC0DA>
+        Signal
+    </td>
+    <td align=center bgcolor=#CCC0DA>
+        Description
+    </td>
+    <td align=center bgcolor=#E6B8B7>
+        Signal
+    </td>
+    <td align=center bgcolor=#E6B8B7>
+        Description
+    </td>
+    <td align=center bgcolor=#B7DEE8>
+        Signal
+    </td>
+    <td align=center bgcolor=#B7DEE8>
+        Description
+    </td>
+</tr>
+
+<tr>
+    <td bgcolor=gray>
+        1
+    </td>
+    <td colspan=2 align=center bgcolor=yellow>
+        3.3V
+    </td>
+    <td colspan=2 align=center bgcolor=yellow>
+        3.3V
+    </td>
+    <td colspan=2 align=center bgcolor=yellow>
+        3.3V
+    </td>
+    <td colspan=2 align=center bgcolor=yellow>
+        3.3V
+    </td>
+    <td colspan=2 align=center bgcolor=red>
+        5V
+    </td>
+    <td colspan=2 align=center bgcolor=red>
+        5V
+    </td>
+    <td colspan=2 align=center bgcolor=red>
+        5V
+    </td>
+    <td colspan=2 align=center bgcolor=red>
+        5V
+    </td>
+    <td bgcolor=gray>
+        2
+    </td>
+</tr>
+
+<tr>
+    <td bgcolor=gray>
+        3
+    </td>
+    <td bgcolor=#B7DEE8>
+        PC3
+    </td>
+    <td align=center bgcolor=#B7DEE8>
+        GPIO67
+    </td>
+    <td colspan=2 align=center bgcolor=gray>
+        NC
+    </td>
+    <td colspan=2 align=center bgcolor=gray>
+        NC
+    </td>
+    <td align=center bgcolor=#D8E4BC>
+        GPIO2
+    </td>
+    <td align=center bgcolor=#D8E4BC>
+        I2C1 SDA
+    </td>
+    <td colspan=2 align=center bgcolor=red>
+        5V
+    </td>
+    <td colspan=2 align=center bgcolor=red>
+        5V
+    </td>
+    <td colspan=2 align=center bgcolor=red>
+        5V
+    </td>
+    <td colspan=2 align=center bgcolor=red>
+        5V
+    </td>
+    <td bgcolor=gray>
+        4
+    </td>
+</tr>
+
+<tr>
+    <td bgcolor=gray>
+        5
+    </td>
+    <td bgcolor=#B7DEE8>
+        PC0
+    </td>
+    <td align=center bgcolor=#B7DEE8>
+        GPIO64
+    </td>
+    <td colspan=2 align=center bgcolor=gray>
+        NC
+    </td>
+    <td colspan=2 align=center bgcolor=gray>
+        NC
+    </td>
+    <td align=center bgcolor=#D8E4BC>
+        GPIO3
+    </td>
+    <td align=center bgcolor=#D8E4BC>
+        I2C1 SCL
+    </td>
+    <td colspan=2 align=center bgcolor=black>
+        <font color=white>GND</font>
+    </td>
+    <td colspan=2 align=center bgcolor=black>
+        <font color=white>GND</font>
+    </td>
+    <td colspan=2 align=center bgcolor=black>
+        <font color=white>GND</font>
+    </td>
+    <td colspan=2 align=center bgcolor=black>
+        <font color=white>GND</font>
+    </td>
+    <td bgcolor=gray>
+        6
+    </td>
+</tr>
+
+<tr>
+    <td bgcolor=gray>
+        7
+    </td>
+    <td bgcolor=#B7DEE8>
+        PC7
+    </td>
+    <td align=center bgcolor=#B7DEE8>
+        GPIO71
+    </td>
+    <td align=center bgcolor=#E6B8B7>
+        PI14
+    </td>
+    <td align=center bgcolor=#E6B8B7>
+        GPIO170
+    </td>
+    <td align=center bgcolor=#CCC0DA>
+        PC7
+    </td>
+    <td align=center bgcolor=#CCC0DA>
+        GPIO71
+    </td>
+    <td align=center bgcolor=#D8E4BC>
+        GPIO4
+    </td>
+    <td align=center bgcolor=#D8E4BC>
+        GPCLK0
+    </td>
+    <td align=center bgcolor=#D8E4BC>
+        GPIO14
+    </td>
+    <td align=center bgcolor=#D8E4BC>
+        UART TX
+    </td>
+    <td align=center bgcolor=#CCC0DA>
+        PH0
+    </td>
+    <td align=center bgcolor=#CCC0DA>
+        GPIO224, UART0_TX
+    </td>
+    <td align=center bgcolor=#E6B8B7>
+        PH0
+    </td>
+    <td align=center bgcolor=#E6B8B7>
+        GPIO224, UART0_TX
+    </td>
+    <td align=center bgcolor=#B7DEE8>
+        PH0
+    </td>
+    <td align=center bgcolor=#B7DEE8>
+        GPIO224, UART0_TX
+    </td>
+    <td bgcolor=gray>
+        8
+    </td>
+</tr>
+
+<tr>
+    <td bgcolor=gray>
+        9
+    </td>
+    <td colspan=2 align=center bgcolor=black>
+        <font color=white>GND</font>
+    </td>
+    <td colspan=2 align=center bgcolor=black>
+        <font color=white>GND</font>
+    </td>
+    <td colspan=2 align=center bgcolor=black>
+        <font color=white>GND</font>
+    </td>
+    <td colspan=2 align=center bgcolor=black>
+        <font color=white>GND</font>
+    </td>
+    <td align=center bgcolor=#D8E4BC>
+        GPIO15
+    </td>
+    <td align=center bgcolor=#D8E4BC>
+        UART RX
+    </td>
+    <td align=center bgcolor=#CCC0DA>
+        PH1
+    </td>
+    <td align=center bgcolor=#CCC0DA>
+        GPIO225, UART0_RX
+    </td>
+    <td align=center bgcolor=#E6B8B7>
+        PH1
+    </td>
+    <td align=center bgcolor=#E6B8B7>
+        GPIO225, UART0_RX
+    </td>
+    <td align=center bgcolor=#B7DEE8>
+        PH1
+    </td>
+    <td align=center bgcolor=#B7DEE8>
+        GPIO225, UART0_RX
+    </td>
+    <td bgcolor=gray>
+        10
+    </td>
+</tr>
+
+<tr>
+    <td bgcolor=gray>
+        11
+    </td>
+    <td bgcolor=#B7DEE8>
+        PC14
+    </td>
+    <td align=center bgcolor=#B7DEE8>
+        GPIO78
+    </td>
+    <td align=center bgcolor=#E6B8B7>
+        PI15
+    </td>
+    <td align=center bgcolor=#E6B8B7>
+        GPIO271
+    </td>
+    <td align=center bgcolor=#CCC0DA>
+        PC14
+    </td>
+    <td align=center bgcolor=#CCC0DA>
+        GPIO78
+    </td>
+    <td align=center bgcolor=#D8E4BC>
+        GPIO17
+    </td>
+    <td align=center bgcolor=#D8E4BC>
+        SPI1 CE1
+    </td>
+    <td align=center bgcolor=#D8E4BC>
+        GPIO18
+    </td>
+    <td align=center bgcolor=#D8E4BC>
+        PCM CLK
+    </td>
+    <td align=center bgcolor=#CCC0DA>
+        PC13
+    </td>
+    <td align=center bgcolor=#CCC0DA>
+        GPIO77
+    </td>
+    <td align=center bgcolor=#E6B8B7>
+        PI7
+    </td>
+    <td align=center bgcolor=#E6B8B7>
+        GPIO263
+    </td>
+    <td align=center bgcolor=#B7DEE8>
+        PC13
+    </td>
+    <td align=center bgcolor=#B7DEE8>
+        GPIO77
+    </td>
+    <td bgcolor=gray>
+        12
+    </td>
+</tr>
+
+<tr>
+    <td bgcolor=gray>
+        13
+    </td>
+    <td bgcolor=#B7DEE8>
+        PC12
+    </td>
+    <td align=center bgcolor=#B7DEE8>
+        GPIO76
+    </td>
+    <td align=center bgcolor=#E6B8B7>
+        PI6
+    </td>
+    <td align=center bgcolor=#E6B8B7>
+        GPIO262
+    </td>
+    <td align=center bgcolor=#CCC0DA>
+        PC12
+    </td>
+    <td align=center bgcolor=#CCC0DA>
+        GPIO76
+    </td>
+    <td align=center bgcolor=#D8E4BC>
+        GPIO27
+    </td>
+    <td align=center bgcolor=#D8E4BC>
+        <br />
+    </td>
+    <td colspan=2 align=center bgcolor=black>
+        <font color=white>GND</font>
+    </td>
+    <td colspan=2 align=center bgcolor=black>
+        <font color=white>GND</font>
+    </td>
+    <td colspan=2 align=center bgcolor=black>
+        <font color=white>GND</font>
+    </td>
+    <td colspan=2 align=center bgcolor=black>
+        <font color=white>GND</font>
+    </td>
+    <td bgcolor=gray>
+        14
+    </td>
+</tr>
+
+<tr>
+    <td bgcolor=gray>
+        15
+    </td>
+    <td bgcolor=#B7DEE8>
+        PC10
+    </td>
+    <td align=center bgcolor=#B7DEE8>
+        74
+    </td>
+    <td align=center bgcolor=#E6B8B7>
+        PI4
+    </td>
+    <td align=center bgcolor=#E6B8B7>
+        GPIO260
+    </td>
+    <td align=center bgcolor=#CCC0DA>
+        PC10
+    </td>
+    <td align=center bgcolor=#CCC0DA>
+        GPIO74
+    </td>
+    <td align=center bgcolor=#D8E4BC>
+        GPIO22
+    </td>
+    <td align=center bgcolor=#D8E4BC>
+        <br />
+    </td>
+    <td align=center bgcolor=#D8E4BC>
+        GPIO23
+    </td>
+    <td align=center bgcolor=#D8E4BC>
+        <br />
+    </td>
+    <td align=center bgcolor=#CCC0DA>
+        PC11
+    </td>
+    <td align=center bgcolor=#CCC0DA>
+        GPIO75
+    </td>
+    <td align=center bgcolor=#E6B8B7>
+        PI5
+    </td>
+    <td align=center bgcolor=#E6B8B7>
+        GPIO261
+    </td>
+    <td align=center bgcolor=#B7DEE8>
+        PC11
+    </td>
+    <td align=center bgcolor=#B7DEE8>
+        GPIO75
+    </td>
+    <td bgcolor=gray>
+        16
+    </td>
+</tr>
+
+<tr>
+    <td bgcolor=gray>
+        17
+    </td>
+    <td colspan=2 align=center bgcolor=yellow>
+        3.3V
+    </td>
+    <td colspan=2 align=center bgcolor=yellow>
+        3.3V
+    </td>
+    <td colspan=2 align=center bgcolor=yellow>
+        3.3V
+    </td>
+    <td colspan=2 align=center bgcolor=yellow>
+        3.3V
+    </td>
+    <td align=center bgcolor=#D8E4BC>
+        GPIO24
+    </td>
+    <td align=center bgcolor=#D8E4BC>
+        <br />
+    </td>
+    <td align=center bgcolor=#CCC0DA>
+        PC9
+    </td>
+    <td align=center bgcolor=#CCC0DA>
+        GPIO73
+    </td>
+    <td align=center bgcolor=#E6B8B7>
+        PI3
+    </td>
+    <td align=center bgcolor=#E6B8B7>
+        GPIO259
+    </td>
+    <td align=center bgcolor=#B7DEE8>
+        PC9
+    </td>
+    <td align=center bgcolor=#B7DEE8>
+        GPIO73
+    </td>
+    <td bgcolor=gray>
+        18
+    </td>
+</tr>
+
+<tr>
+    <td bgcolor=gray>
+        19
+    </td>
+    <td bgcolor=#B7DEE8>
+        PH7
+    </td>
+    <td align=center bgcolor=#B7DEE8>
+        GPIO231, SPI1_MOSI
+    </td>
+    <td align=center bgcolor=#E6B8B7>
+        PH7
+    </td>
+    <td align=center bgcolor=#E6B8B7>
+        GPIO231, SPI1_MOSI
+    </td>
+    <td align=center bgcolor=#CCC0DA>
+        PH7
+    </td>
+    <td align=center bgcolor=#CCC0DA>
+        GPIO231, SPI1_MOSI
+    </td>
+    <td align=center bgcolor=#D8E4BC>
+        GPIO10
+    </td>
+    <td align=center bgcolor=#D8E4BC>
+        SPI0 MOSI
+    </td>
+    <td colspan=2 align=center bgcolor=black>
+        <font color=white>GND</font>
+    </td>
+    <td colspan=2 align=center bgcolor=black>
+        <font color=white>GND</font>
+    </td>
+    <td colspan=2 align=center bgcolor=black>
+        <font color=white>GND</font>
+    </td>
+    <td colspan=2 align=center bgcolor=black>
+        <font color=white>GND</font>
+    </td>
+    <td bgcolor=gray>
+        20
+    </td>
+</tr>
+
+<tr>
+    <td bgcolor=gray>
+        21
+    </td>
+    <td bgcolor=#B7DEE8>
+        PH8
+    </td>
+    <td align=center bgcolor=#B7DEE8>
+        GPIO232, SPI1_MISO
+    </td>
+    <td align=center bgcolor=#E6B8B7>
+        PH8
+    </td>
+    <td align=center bgcolor=#E6B8B7>
+        GPIO232, SPI1_MISO
+    </td>
+    <td align=center bgcolor=#CCC0DA>
+        PH8
+    </td>
+    <td align=center bgcolor=#CCC0DA>
+        GPIO232, SPI1_MISO
+    </td>
+    <td align=center bgcolor=#D8E4BC>
+        GPIO9
+    </td>
+    <td align=center bgcolor=#D8E4BC>
+        SPI0 MISO
+    </td>
+    <td align=center bgcolor=#D8E4BC>
+        GPIO25
+    </td>
+    <td align=center bgcolor=#D8E4BC>
+        <br />
+    </td>
+    <td colspan=2 align=center bgcolor=gray>
+        NC
+    </td>
+    <td colspan=2 align=center bgcolor=gray>
+        NC
+    </td>
+    <td align=center bgcolor=#B7DEE8>
+        PG13
+    </td>
+    <td align=center bgcolor=#B7DEE8>
+        GPIO205
+    </td>
+    <td bgcolor=gray>
+        22
+    </td>
+</tr>
+
+<tr>
+    <td bgcolor=gray>
+        23
+    </td>
+    <td bgcolor=#B7DEE8>
+        PH6
+    </td>
+    <td align=center bgcolor=#B7DEE8>
+        GPIO230, SPI1_CLK
+    </td>
+    <td align=center bgcolor=#E6B8B7>
+        PH6
+    </td>
+    <td align=center bgcolor=#E6B8B7>
+        GPIO230, SPI1_CLK
+    </td>
+    <td align=center bgcolor=#CCC0DA>
+        PH6
+    </td>
+    <td align=center bgcolor=#CCC0DA>
+        GPIO230, SPI1_CLK
+    </td>
+    <td align=center bgcolor=#D8E4BC>
+        GPIO11
+    </td>
+    <td align=center bgcolor=#D8E4BC>
+        SPI0 SCLK
+    </td>
+    <td align=center bgcolor=#D8E4BC>
+        GPIO8
+    </td>
+    <td align=center bgcolor=#D8E4BC>
+        SPI0 CE0
+    </td>
+    <td colspan=2 align=center bgcolor=gray>
+        NC
+    </td>
+    <td colspan=2 align=center bgcolor=gray>
+        NC
+    </td>
+    <td align=center bgcolor=#B7DEE8>
+        PG12
+    </td>
+    <td align=center bgcolor=#B7DEE8>
+        GPIO204
+    </td>
+    <td bgcolor=gray>
+        24
+    </td>
+</tr>
+
+<tr>
+    <td bgcolor=gray>
+        25
+    </td>
+    <td colspan=2 align=center bgcolor=black>
+        <font color=white>GND</font>
+    </td>
+    <td colspan=2 align=center bgcolor=black>
+        <font color=white>GND</font>
+    </td>
+    <td colspan=2 align=center bgcolor=black>
+        <font color=white>GND</font>
+    </td>
+    <td colspan=2 align=center bgcolor=black>
+        <font color=white>GND</font>
+    </td>
+    <td align=center bgcolor=#D8E4BC>
+        GPIO7
+    </td>
+    <td align=center bgcolor=#D8E4BC>
+        SPI0 CE1
+    </td>
+    <td align=center bgcolor=#CCC0DA>
+        PG8
+    </td>
+    <td align=center bgcolor=#CCC0DA>
+        GPIO200
+    </td>
+    <td align=center bgcolor=#E6B8B7>
+        PI11
+    </td>
+    <td align=center bgcolor=#E6B8B7>
+        GPIO267
+    </td>
+    <td align=center bgcolor=#B7DEE8>
+        PI9
+    </td>
+    <td align=center bgcolor=#B7DEE8>
+        GPIO265
+    </td>
+    <td bgcolor=gray>
+        26
+    </td>
+</tr>
+
+<tr>
+    <td bgcolor=gray>
+        27
+    </td>
+    <td bgcolor=#B7DEE8>
+        PC2
+    </td>
+    <td align=center bgcolor=#B7DEE8>
+        GPIO66
+    </td>
+    <td colspan=2 align=center bgcolor=gray>
+        NC
+    </td>
+    <td colspan=2 align=center bgcolor=gray>
+        NC
+    </td>
+    <td align=center bgcolor=#D8E4BC>
+        GPIO0
+    </td>
+    <td align=center bgcolor=#D8E4BC>
+        EEPROM SDA
+    </td>
+    <td align=center bgcolor=#D8E4BC>
+        GPIO1
+    </td>
+    <td align=center bgcolor=#D8E4BC>
+        EEPROM SCL
+    </td>
+    <td align=center bgcolor=#CCC0DA>
+        PG7
+    </td>
+    <td align=center bgcolor=#CCC0DA>
+        GPIO199
+    </td>
+    <td align=center bgcolor=#E6B8B7>
+        PI10
+    </td>
+    <td align=center bgcolor=#E6B8B7>
+        GPIO266
+    </td>
+    <td align=center bgcolor=#B7DEE8>
+        PI10
+    </td>
+    <td align=center bgcolor=#B7DEE8>
+        GPIO266
+    </td>
+    <td bgcolor=gray>
+        28
+    </td>
+</tr>
+
+<tr>
+    <td bgcolor=gray>
+        29
+    </td>
+    <td bgcolor=#B7DEE8>
+        PC4
+    </td>
+    <td align=center bgcolor=#B7DEE8>
+        GPIO68
+    </td>
+    <td colspan=2 align=center bgcolor=gray>
+        NC
+    </td>
+    <td colspan=2 align=center bgcolor=gray>
+        NC
+    </td>
+    <td align=center bgcolor=#D8E4BC>
+        GPIO5
+    </td>
+    <td align=center bgcolor=#D8E4BC>
+        GPCLK1
+    </td>
+    <td colspan=2 align=center bgcolor=black>
+        <font color=white>GND</font>
+    </td>
+    <td colspan=2 align=center bgcolor=black>
+        <font color=white>GND</font>
+    </td>
+    <td colspan=2 align=center bgcolor=black>
+        <font color=white>GND</font>
+    </td>
+    <td colspan=2 align=center bgcolor=black>
+        <font color=white>GND</font>
+    </td>
+    <td bgcolor=gray>
+        30
+    </td>
+</tr>
+
+<tr>
+    <td bgcolor=gray>
+        31
+    </td>
+    <td bgcolor=#B7DEE8>
+        PI5
+    </td>
+    <td align=center bgcolor=#B7DEE8>
+        GPIO261
+    </td>
+    <td align=center bgcolor=#E6B8B7>
+        PI9
+    </td>
+    <td align=center bgcolor=#E6B8B7>
+        GPIO265
+    </td>
+    <td align=center bgcolor=#CCC0DA>
+        PG6
+    </td>
+    <td align=center bgcolor=#CCC0DA>
+        GPIO198
+    </td>
+    <td align=center bgcolor=#D8E4BC>
+        GPIO6
+    </td>
+    <td align=center bgcolor=#D8E4BC>
+        GPCLK2
+    </td>
+    <td align=center bgcolor=#D8E4BC>
+        GPIO12
+    </td>
+    <td align=center bgcolor=#D8E4BC>
+        PWM0
+    </td>
+    <td align=center bgcolor=#CCC0DA>
+        PG9
+    </td>
+    <td align=center bgcolor=#CCC0DA>
+        GPIO201
+    </td>
+    <td align=center bgcolor=#E6B8B7>
+        PI12
+    </td>
+    <td align=center bgcolor=#E6B8B7>
+        GPIO268
+    </td>
+    <td align=center bgcolor=#B7DEE8>
+        PI6
+    </td>
+    <td align=center bgcolor=#B7DEE8>
+        GPIO262
+    </td>
+    <td bgcolor=gray>
+        32
+    </td>
+</tr>
+
+<tr>
+    <td bgcolor=gray>
+        33
+    </td>
+    <td bgcolor=#B7DEE8>
+        PI14
+    </td>
+    <td align=center bgcolor=#B7DEE8>
+        GPIO270
+    </td>
+    <td colspan=2 align=center bgcolor=gray>
+        NC
+    </td>
+    <td colspan=2 align=center bgcolor=gray>
+        NC
+    </td>
+    <td align=center bgcolor=#D8E4BC>
+        GPIO13
+    </td>
+    <td align=center bgcolor=#D8E4BC>
+        PWM1
+    </td>
+    <td colspan=2 align=center bgcolor=black>
+        <font color=white>GND</font>
+    </td>
+    <td colspan=2 align=center bgcolor=black>
+        <font color=white>GND</font>
+    </td>
+    <td colspan=2 align=center bgcolor=black>
+        <font color=white>GND</font>
+    </td>
+    <td colspan=2 align=center bgcolor=black>
+        <font color=white>GND</font>
+    </td>
+    <td bgcolor=gray>
+        34
+    </td>
+</tr>
+
+<tr>
+    <td bgcolor=gray>
+        35
+    </td>
+    <td bgcolor=#B7DEE8>
+        PC6
+    </td>
+    <td align=center bgcolor=#B7DEE8>
+        GPIO70
+    </td>
+    <td align=center bgcolor=#E6B8B7>
+        PI1
+    </td>
+    <td align=center bgcolor=#E6B8B7>
+        GPIO257
+    </td>
+    <td align=center bgcolor=#CCC0DA>
+        PC6
+    </td>
+    <td align=center bgcolor=#CCC0DA>
+        GPIO70
+    </td>
+    <td align=center bgcolor=#D8E4BC>
+        GPIO19
+    </td>
+    <td align=center bgcolor=#D8E4BC>
+        PCM FS
+    </td>
+    <td align=center bgcolor=#D8E4BC>
+        GPIO16
+    </td>
+    <td align=center bgcolor=#D8E4BC>
+        SPI1 CE2
+    </td>
+    <td colspan=2 align=center bgcolor=gray>
+        NC
+    </td>
+    <td colspan=2 align=center bgcolor=gray>
+        NC
+    </td>
+    <td align=center bgcolor=#B7DEE8>
+        PG11
+    </td>
+    <td align=center bgcolor=#B7DEE8>
+        GPIO203
+    </td>
+    <td bgcolor=gray>
+        36
+    </td>
+</tr>
+
+<tr>
+    <td bgcolor=gray>
+        37
+    </td>
+    <td bgcolor=#B7DEE8>
+        PC15
+    </td>
+    <td align=center bgcolor=#B7DEE8>
+        GPIO79
+    </td>
+    <td align=center bgcolor=#E6B8B7>
+        PI13
+    </td>
+    <td align=center bgcolor=#E6B8B7>
+        GPIO269
+    </td>
+    <td align=center bgcolor=#CCC0DA>
+        PC15
+    </td>
+    <td align=center bgcolor=#CCC0DA>
+        GPIO79
+    </td>
+    <td align=center bgcolor=#D8E4BC>
+        GPIO26
+    </td>
+    <td align=center bgcolor=#D8E4BC>
+        <br />
+    </td>
+    <td align=center bgcolor=#D8E4BC>
+        GPIO20
+    </td>
+    <td align=center bgcolor=#D8E4BC>
+        PCM DIN
+    </td>
+    <td align=center bgcolor=#CCC0DA>
+        PH10
+    </td>
+    <td align=center bgcolor=#CCC0DA>
+        GPIO234, IR_RX
+    </td>
+    <td align=center bgcolor=#E6B8B7>
+        PH10
+    </td>
+    <td align=center bgcolor=#E6B8B7>
+        GPIO234, IR_RX
+    </td>
+    <td align=center bgcolor=#B7DEE8>
+        PH4
+    </td>
+    <td align=center bgcolor=#B7DEE8>
+        GPIO228
+    </td>
+    <td bgcolor=gray>
+        38
+    </td>
+</tr>
+
+<tr>
+    <td bgcolor=gray>
+        39
+    </td>
+    <td colspan=2 align=center bgcolor=black>
+        <font color=white>GND</font>
+    </td>
+    <td colspan=2 align=center bgcolor=black>
+        <font color=white>GND</font>
+    </td>
+    <td colspan=2 align=center bgcolor=black>
+        <font color=white>GND</font>
+    </td>
+    <td colspan=2 align=center bgcolor=black>
+        <font color=white>GND</font>
+    </td>
+    <td align=center bgcolor=#D8E4BC>
+        GPIO21
+    </td>
+    <td align=center bgcolor=#D8E4BC>
+        PCM DOUT
+    </td>
+    <td align=center bgcolor=#CCC0DA>
+        PC8
+    </td>
+    <td align=center bgcolor=#CCC0DA>
+        GPIO72
+    </td>
+    <td align=center bgcolor=#E6B8B7>
+        PI2
+    </td>
+    <td align=center bgcolor=#E6B8B7>
+        GPIO258
+    </td>
+    <td align=center bgcolor=#B7DEE8>
+        PC8
+    </td>
+    <td align=center bgcolor=#B7DEE8>
+        GPIO72
+    </td>
+    <td bgcolor=gray>
+        40
+    </td>
+</tr>
+
+</table>
+
 # Note
 ## Here’s BIGTREETECH! For Makers, by makers!
 * We appreciate all of your support to BIGTREETECH! To offer an excellent experience of creation to every makers,We’re devoted to design and produce high-quality and durable accessories!
