@@ -283,7 +283,7 @@ __NOTE: The CB1 eMMC version can also use the SD card as the OS image source, an
         PI14
     </td>
     <td align=center bgcolor=#E6B8B7>
-        GPIO170
+        GPIO270
     </td>
     <td align=center bgcolor=#CCC0DA>
         PC7
@@ -481,7 +481,7 @@ __NOTE: The CB1 eMMC version can also use the SD card as the OS image source, an
         PC10
     </td>
     <td align=center bgcolor=#B7DEE8>
-        74
+        GPIO74
     </td>
     <td align=center bgcolor=#E6B8B7>
         PI4
