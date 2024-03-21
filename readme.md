@@ -6,7 +6,7 @@
 * The latest system image is [here](https://github.com/bigtreetech/CB1/releases)
 * The source code is [here](https://github.com/bigtreetech/CB1-Kernel)
 
-# V2.3.0 OS Setting
+# V2.3.4 OS Setting
 ## WIFI Settings
 * After the OS writes to the SD card, there is a FAT32 partition named `BOOT`, open `system.cfg` file with `Notpad`, `Notpad++` or `VSCode`.
 <br/><img src=Images/system.png width="800"/><br/>
@@ -24,9 +24,20 @@ For example: `WIFI_SSID="CB1 Tester"`
     For example:<br/>
     BTT-HDMI7 resolution = 1024x600: `extraargs=video=HDMI-A-1:1024x600-24@60`<br/>
     BTT-HDMI5 resolution = 800x480: `extraargs=video=HDMI-A-1:800x480-24@60`<br/>
-    * Uncomment `overlays=tft35_spi` to enable TFT35 SPI screen.
+    * Uncomment `overlays=tft35_spi` to enable TFT35 SPI screen, uncomment `param_tft35_spi_rotate=xx`(0, 90, 180, 270) to set TFT35 SPI rotation angle, we may also need to set `ks_angle` in `system.cfg` to set touch rotation to match the display of TFT35.
     * Uncomment `overlays=mcp2515` to enable MCP2515 spi to canbus module (Theoretically, it can be multiplexed with `tft35_spi` and 'spidev1.2' at the same time, but `mcp2515` needs strong real-time, it is better not to enable other SPI1 features when using `mcp2515`).
+    * uncomment `overlays=i2c0` to release '/dev/i2c-0' to user space for `BTT Pi` / `CB1 eMMC`, The list of i2c device is as follows:
+		* Before uncomment, the system has 3 built-in i2c devices:
+            * `/dev/i2c-0`: twi3(PA10/PA11) for the H616 built-in Ethernet PHY device (ac200/ac300).
+            *  `/dev/i2c-1`: for PMU axp313a.
+            *  `/dev/i2c-2`: for HDMI's i2c.
+		* After uncomment, 1 user space i2c + 3 built-in i2c:
+            *  `/dev/i2c-0`: user space i2c0(PI5/PI6).
+            * `/dev/i2c-1`: twi3(PA10/PA11) for the H616 built-in Ethernet PHY device (ac200/ac300).
+            *  `/dev/i2c-2`: for PMU axp313a.
+            *  `/dev/i2c-3`: for HDMI's i2c.
     * uncomment `overlays=spidev1_2` to release 'spidev1.2' to user space (For example: adxl345), `spidev1.0` is used by `MCP2515`, `spidev1.1` is used by `tft35_spi`.
+    * uncomment `#param_gpio_shutdown_pin=PC7` and `#param_gpio_shutdown_level=0` for GPIO triggers system shutdown feature, `#param_gpio_shutdown_pin` is the GPIO used for detection, `#param_gpio_shutdown_level` is the triggering level, `0` means the falling edge is triggered, and `1` means the rising edge is triggered.
     <br/><img src=Images/overlays.png width="800"/><br/>
 * NOTE: TFT35 SPI and MCP2515 multiplex a group of SPI1
     ```
