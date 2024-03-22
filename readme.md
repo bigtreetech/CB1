@@ -49,6 +49,10 @@ For example: `WIFI_SSID="CB1 Tester"`
     MCP2515_IRQ=PC9
     ```
 
+## Custom logo
+
+Refer to [here](https://github.com/bigtreetech/armbian-bootlogo)
+
 # CB1 eMMC Version
 __NOTE: The CB1 eMMC version can also use the SD card as the OS image source, and the priority of the SD card is higher than on-board eMMC, so when using the eMMC, remember not to insert the OS SD card__
 1. Download the utility [sunxi-fel](https://github.com/bigtreetech/sunxi-tools) to your computer (Mac OS is not supported) and download the CB1 [driver](https://github.com/bigtreetech/sunxi-tools/raw/master/u-boot-sunxi-cb1-emmc.bin)
