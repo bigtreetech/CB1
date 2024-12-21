@@ -4,29 +4,157 @@
 
 # OS image
 * The latest system image is [here](https://github.com/bigtreetech/CB1/releases)
-* The source code is [here](https://github.com/bigtreetech/CB1-Kernel)
+* The source code is [here](https://github.com/bigtreetech/build/tree/bpi-main)
 
-# V2.3.4 OS Setting
-## WIFI Settings
-* After the OS writes to the SD card, there is a FAT32 partition named `BOOT`, open `system.cfg` file with `Notpad`, `Notpad++` or `VSCode`.
-<br/><img src=Images/system.png width="800"/><br/>
-* Set `WIFI_SSID` as your actual wifi name and `WIFI_PASSWD` as your actual wifi password, The space character can be parsed normally without additional escape character.<br/>
-For example: `WIFI_SSID="CB1 Tester"`
-<br/><img src=Images/wifi.png width="800"/><br/>
+# V3.0.0 OS Setting
+## System Settings
+* After the OS writes to the SD card, there is a FAT32 partition named `BOOT`, open `system.cfg` file with `Notpad` or `VSCode`.
+<br/><img src=Images/system.png width="800"/><br/><img src=Images/setting.png width="800"/><br/>
+*
+    ```
+    check_interval=5
+    eth=end0
+    wlan=wlan0
+    ```
+    The script automatically connects to the WiFi parameters required, do not modify it
+*
+    ```
+    hostname="BIGTREETECH-CB1"
+    ```
+    Uncomment to set the hostname of the device. The default is `BIGTREETECH-CB1`.
+*
+    ```
+    ks_src="HDMI-1"
+    ks_angle="normal"
+    ```
+    Uncomment to set the parameters for KlipeprScreen display rotation, `ks_src` is the screen type, `ks_angle` is the rotation angle (if the screen is `TFT35`, you need to set `param_tft35_spi_rotate` in `armbianEnv.txt` additionally)
+*
+    ```
+    WIFI_SSID="Your SSID"
+    WIFI_PASSWD="Your Password"
+    ```
+    Uncomment to set the WiFi parameters. Set `WIFI_SSID` as your actual wifi name and `WIFI_PASSWD` as your actual wifi password, The space character can be parsed normally without additional escape character.<br/>
+    For example: `WIFI_SSID="CB1 Tester"`
+*
+    ```
+    BTT_PAD7="OFF"
+    TOUCH_VIBRATION="OFF"
+    TOUCH_SOUND="OFF"
+    AUTO_BRIGHTNESS="OFF"
+    ```
+    The feature of BIGTREETECH Pad7. All of these functions require the corresponding `overlay` to be enabled in `armbianEnv.txt`<br/>
+    `BTT_PAD7` is the master switch of the following functions. When it is set to `off`, all the following configurations will be ignored.<br/>
+    `TOUCH_VIBRATION` is vibration feedback when clicking on KlipperScreen buttons (Requires a [special KlipperScreen](https://github.com/bigtreetech/KlipperScreen/tree/master) version to be used together). overlay `pad7_vibration` required in `armbianEnv.txt`.<br/>
+    `TOUCH_SOUND` is sound feedback when clicking on KlipperScreen buttons (Requires a [special KlipperScreen](https://github.com/bigtreetech/KlipperScreen/tree/master) version to be used together,  The HDMI audio does not output the first 1-2 seconds, so this function is currently unavailable in V3.0.0). No additional overlay required<br/>
+    `AUTO_BRIGHTNESS` is to automatically set the screen backlight brightness according to the ambient light intensity detected by the photosensitive components. overlay `light` required in `armbianEnv.txt`.
 
 ## Overlays Settings
-* After the OS writes to the SD card, there is a FAT32 partition named `BOOT`, open `BoardEnv.txt` file with `Notpad`, `Notpad++` or `VSCode`.
+* After the OS writes to the SD card, there is a FAT32 partition named `BOOT`, open `armbianEnv.txt` file with `Notpad` or `VSCode`.
+<br/><img src=Images/ArmbianEnv.png width="800"/><br/><img src=Images/overlays.png width="800"/><br/>
+*
+    ```
+    bootlogo=false
+    ```
+    `false` display terminal startup log information without displaying logo.
+    `true` display logo but not terminal startup log information.
+*
+    ```
+    fdtfile=sun50i-h616-bigtreetech-cb1-sd.dtb
+    ```
+    set `fdtfile` to `sun50i-h616-bigtreetech-cb1-emmc.dtb` for CB1 eMMC version, set `fdtfile` to `sun50i-h616-bigtreetech-cb1-sd.dtb` (default value) for CB1 normal version.
+*
+    ```
+    console=display
+    ```
+    The default value is `console=display`, This means that the `UART0` of CB1 is used as the debugging port by default. We can use `MobaXterm` to connect to CB1 by UART0 and debug. If klipper wants to use `UART0` to control the motherboard, we need to set it to `console=serial`, now klippe can use `UART0` as `/dev/ttyS0`.
+*
+    ```
+    extraargs=video=HDMI-A-1:1024x600-24@60
+    ```
+    CB1 will automatically identify the HDMI resolution, but if your HDMI screen cannot report the resolution through the EDID normally, we can forcibly specify the resolution of CB1 output by uncomment `extraargs=video` and set the actual resolution.<br/>
+    For example:<br/>
+    BIGTREETECH-HDMI7 resolution = 1024x600: `extraargs=video=HDMI-A-1:1024x600-24@60`<br/>
+    BIGTREETECH-HDMI5 resolution = 800x480: `extraargs=video=HDMI-A-1:800x480-24@60`
+*
+    ```
+    overlays=ws2812
+    ```
+    Uncomment `overlays=ws2812` to enable the WS2812 status RGB LED function for BIGTREETECH Pad7.
+*
+    ```
+    overlays=tft35_spi
+    param_tft35_spi_rotate=0
+    ```
+    Uncomment `overlays=tft35_spi` to enable TFT35 SPI screen, uncomment `param_tft35_spi_rotate=xx`(0, 90, 180, 270) to set TFT35 SPI rotation angle, we also need to set `ks_src` to sync display type to KlipperScreen and `ks_angle` to set touch rotation to match the display of TFT35 in `system.cfg`.
+*
+    ```
+    overlays=mcp2515
+    ```
+    Uncomment `overlays=mcp2515` to enable MCP2515 spi to canbus module (Theoretically, it can be multiplexed with `tft35_spi` and 'spidev1.2' at the same time, but `mcp2515` needs strong real-time, it is better not to enable other SPI1 features when using `mcp2515`).
+*
+    ```
+    overlays=i2c0
+    ```
+    Uncomment `overlays=i2c0` to release '/dev/i2c-0' to user space for `BIGTREETECH Pi1` / `CB1 eMMC`, The list of i2c device is as follows:
+    * Before uncomment, the system has 3 built-in i2c devices:
+        * `/dev/i2c-0`: for PMU axp313a.
+        * `/dev/i2c-1`: for HDMI's i2c.
+        * `/dev/i2c-2`: twi3(PA10/PA11) for the H616 built-in Ethernet PHY device (ac200/ac300).
+    * After uncomment, 1 user space i2c + 3 built-in i2c:
+        * `/dev/i2c-0`: user space i2c0(PI5/PI6).
+        * `/dev/i2c-1`: for PMU axp313a.
+        * `/dev/i2c-2`: for HDMI's i2c.
+        * `/dev/i2c-3`: twi3(PA10/PA11) for the H616 built-in Ethernet PHY device (ac200/ac300).
+*
+    ```
+    overlays=spidev1_2
+    ```
+    Uncomment `overlays=spidev1_2` to release 'spidev1.2' to user space (For example: adxl345), `spidev1.0` is used by `MCP2515`, `spidev1.1` is used by `tft35_spi`.
+*
+    ```
+    overlays=ir
+    ```
+    Uncomment `overlays=ir` to enable IR feature for `BIGTREETECH Pi1`, now we can use command `sudo ir-keytable -c -p NEC -t` to test the IR feature.
+*
+    ```
+    param_gpio_shutdown_pin=PC8
+    param_gpio_shutdown_level=0
+    ```
+    Uncomment `param_gpio_shutdown_pin=PC8` and `param_gpio_shutdown_level=0` for GPIO triggers system shutdown feature, `param_gpio_shutdown_pin` is the GPIO used for detection, `param_gpio_shutdown_level` is the triggering level, `0` means the falling edge is triggered, and `1` means the rising edge is triggered.
+* NOTE: TFT35 SPI and MCP2515 multiplex a group of SPI1
+    ```
+    SPI1_CLK=PH6
+    SPI1_MISO=PH8
+    SPI1_MOSI=PH7
+    TFT35_SPI_CS=PC7 (SD Version) / PI14 (eMMC Version)
+    MCP2515_CS=PC11 (SD Version) / PI5 (eMMC Version)
+    MCP2515_IRQ=PC9 (SD Version) / PI3 (eMMC Version)
+    ```
+
+# V2.3.4 OS Setting
+<details>
+<summary><b>V2.3.4 OS Setting</b></summary>
+
+## WIFI Settings
+* After the OS writes to the SD card, there is a FAT32 partition named `BOOT`, open `system.cfg` file with `Notpad` or `VSCode`.
+<br/><img src=Images/V2.3.4_system.png width="800"/><br/>
+* Set `WIFI_SSID` as your actual wifi name and `WIFI_PASSWD` as your actual wifi password, The space character can be parsed normally without additional escape character.<br/>
+For example: `WIFI_SSID="CB1 Tester"`
+<br/><img src=Images/V2.3.4_wifi.png width="800"/><br/>
+
+## Overlays Settings
+* After the OS writes to the SD card, there is a FAT32 partition named `BOOT`, open `BoardEnv.txt` file with `Notpad` or `VSCode`.
 <br/><img src=Images/BoardEnv.png width="800"/><br/>
 * Set as required as shown in the figure below.
     * set `fdtfile` to `sun50i-h616-biqu-emmc` for CB1 eMMC version, set `fdtfile` to `sun50i-h616-biqu-sd` (default value) for CB1 normal version 
     * The default value is `console=display`, This means that the `UART0` of CB1 is used as the debugging port by default. We can use `MobaXterm` to connect to CB1 by UART0 and debug. If klipper wants to use `UART0` to control the motherboard, we need to set it to `console=serial`, now klippe can use `UART0` as `/dev/ttyS0`.
     * CB1 will automatically identify the HDMI resolution, but if your HDMI screen cannot report the resolution through the EDID normally, we can forcibly specify the resolution of CB1 output by uncomment `extraargs=video` and set the actual resolution.<br/>
     For example:<br/>
-    BTT-HDMI7 resolution = 1024x600: `extraargs=video=HDMI-A-1:1024x600-24@60`<br/>
-    BTT-HDMI5 resolution = 800x480: `extraargs=video=HDMI-A-1:800x480-24@60`<br/>
+    BIGTREETECH-HDMI7 resolution = 1024x600: `extraargs=video=HDMI-A-1:1024x600-24@60`<br/>
+    BIGTREETECH-HDMI5 resolution = 800x480: `extraargs=video=HDMI-A-1:800x480-24@60`<br/>
     * Uncomment `overlays=tft35_spi` to enable TFT35 SPI screen, uncomment `param_tft35_spi_rotate=xx`(0, 90, 180, 270) to set TFT35 SPI rotation angle, we may also need to set `ks_angle` in `system.cfg` to set touch rotation to match the display of TFT35.
     * Uncomment `overlays=mcp2515` to enable MCP2515 spi to canbus module (Theoretically, it can be multiplexed with `tft35_spi` and 'spidev1.2' at the same time, but `mcp2515` needs strong real-time, it is better not to enable other SPI1 features when using `mcp2515`).
-    * uncomment `overlays=i2c0` to release '/dev/i2c-0' to user space for `BTT Pi` / `CB1 eMMC`, The list of i2c device is as follows:
+    * uncomment `overlays=i2c0` to release '/dev/i2c-0' to user space for `BIGTREETECH Pi1` / `CB1 eMMC`, The list of i2c device is as follows:
 		* Before uncomment, the system has 3 built-in i2c devices:
             * `/dev/i2c-0`: twi3(PA10/PA11) for the H616 built-in Ethernet PHY device (ac200/ac300).
             *  `/dev/i2c-1`: for PMU axp313a.
@@ -37,21 +165,22 @@ For example: `WIFI_SSID="CB1 Tester"`
             *  `/dev/i2c-2`: for PMU axp313a.
             *  `/dev/i2c-3`: for HDMI's i2c.
     * uncomment `overlays=spidev1_2` to release 'spidev1.2' to user space (For example: adxl345), `spidev1.0` is used by `MCP2515`, `spidev1.1` is used by `tft35_spi`.
-    * uncomment `#param_gpio_shutdown_pin=PC7` and `#param_gpio_shutdown_level=0` for GPIO triggers system shutdown feature, `#param_gpio_shutdown_pin` is the GPIO used for detection, `#param_gpio_shutdown_level` is the triggering level, `0` means the falling edge is triggered, and `1` means the rising edge is triggered.
-    <br/><img src=Images/overlays.png width="800"/><br/>
+    * uncomment `#param_gpio_shutdown_pin=PC8` and `#param_gpio_shutdown_level=0` for GPIO triggers system shutdown feature, `#param_gpio_shutdown_pin` is the GPIO used for detection, `#param_gpio_shutdown_level` is the triggering level, `0` means the falling edge is triggered, and `1` means the rising edge is triggered.
+    <br/><img src=Images/V2.3.4_overlays.png width="800"/><br/>
 * NOTE: TFT35 SPI and MCP2515 multiplex a group of SPI1
     ```
     SPI1_CLK=PH6
     SPI1_MISO=PH8
     SPI1_MOSI=PH7
-    TFT35_SPI_CS=PC7
-    MCP2515_CS=PC11
-    MCP2515_IRQ=PC9
+    TFT35_SPI_CS=PC7 (SD Version) / PI14 (eMMC Version)
+    MCP2515_CS=PC11 (SD Version) / PI5 (eMMC Version)
+    MCP2515_IRQ=PC9 (SD Version) / PI3 (eMMC Version)
     ```
+</details>
 
-## Custom logo
+# Custom logo
 
-Refer to [here](https://github.com/bigtreetech/armbian-bootlogo)
+Refer to [here](https://bttwiki.com/pi_custom_logo.html)
 
 # CB1 eMMC Version
 __NOTE: The CB1 eMMC version can also use the SD card as the OS image source, and the priority of the SD card is higher than on-board eMMC, so when using the eMMC, remember not to insert the OS SD card__
@@ -94,7 +223,7 @@ __NOTE: The CB1 eMMC version can also use the SD card as the OS image source, an
         Pin
     </td>
     <td colspan=2 align=center bgcolor=#B7DEE8>
-        BTT Pi
+        BIGTREETECH Pi1
     </td>
     <td colspan=2 align=center bgcolor=#E6B8B7>
         CB1 eMMC
@@ -115,7 +244,7 @@ __NOTE: The CB1 eMMC version can also use the SD card as the OS image source, an
         CB1 eMMC
     </td>
     <td colspan=2 align=center bgcolor=#B7DEE8>
-        BTT Pi
+        BIGTREETECH Pi1
     </td>
     <td rowspan=2 align=center bgcolor=gray>
         Pin
